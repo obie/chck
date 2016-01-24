@@ -1,9 +1,8 @@
-Obcheck
-===
+#chck
 
 _Inspired by [JSON Filter](https://github.com/mmckegg/json-filter) by Matt McKegg_
 
-Match objects against a specification.
+Check that objects match a specification.
 
 ## Installation
 
