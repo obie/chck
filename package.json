@@ -1,0 +1,25 @@
+{
+  "name": "chck",
+  "version": "0.1.0",
+  "description": "Check that an object's attributes match a specification",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap test.js -Rspec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/obie/chck"
+  },
+  "keywords": [
+    "attributes",
+    "filtering",
+    "guard",
+    "querying",
+    "validation"
+  ],
+  "devDependencies": {
+    "tap": "~5"
+  },
+  "author": "Obie Fernandez",
+  "license": "MIT"
+}
