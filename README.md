@@ -2,7 +2,7 @@
 
 _Inspired by [JSON Filter](https://github.com/mmckegg/json-filter) by Matt McKegg_
 
-Check that objects match a specification.
+Check that objects match a specification. Written specifically for use in Lambda function event handler guard clauses as described in [Serverless: Patterns of Modern Application Design Using Microservices ](http://leanpub.com/serverless)
 
 ## Installation
 
@@ -10,23 +10,40 @@ Check that objects match a specification.
 $ npm install chck
 ```
 
+## Example
+
+We find `chck` especially useful for refactoring boolean expressions in guard clauses so that they're obvious and maintainable.
+
+```js
+var chck = require('chck');
+
+exports.handler = function(order, context) {
+  if(chck(order, {
+    UserId: {$present: true}
+    FeedbackHistory: {$present: false}
+  })) {
+    feedback.lookup(order.UserId, function(err, history) {
+      // attach history to message...
+
+```
+
 ## Usage
 
 ```js
-var check = require('chck')
+var chck = require('chck')
 ```
 
-### check(source, spec)
+### chck(source, spec)
 
-The `check` function analyzes a `source` object according to a `spec` object and returns `true` or `false` depending on whether it matches. Every attribute in `spec` must be satisfied or the check fails. Useful for refactoring complex boolean expressions in guard clauses.
+Checks a `source` object according to a `spec` object and returns `true` or `false` depending on whether it matches. Every attribute in `spec` must be satisfied or the check fails.
 
-### check.any(source, spec)
+### chck.any(source, spec)
 Matching attributes in `spec` is not required, but if there is a match, it must pass.
 
-### check.strict(source, spec)
+### chck.strict(source, spec)
 Slight variation in that every attribute present in `source` must be included in `spec`.
 
-### check.same(source, spec)
+### chck.same(source, spec)
 Deep comparison. All attributes must be exactly the same and $conditionals are ignored. Useful for detecting changed objects.
 
 ## Specification Object
