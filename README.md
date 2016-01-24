@@ -19,7 +19,7 @@ var chck = require('chck');
 
 exports.handler = function(order, context) {
   if(chck(order, {
-    UserId: {$present: true}
+    UserId: {$present: true},
     FeedbackHistory: {$present: false}
   })) {
     feedback.lookup(order.UserId, function(err, history) {
